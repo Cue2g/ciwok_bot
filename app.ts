@@ -15,12 +15,14 @@ namedb = process.env.DB_NAME,
 url = `mongodb+srv://${userdb}:${pwdb}@cluster0.4qxcs.mongodb.net/${namedb}`
 
 const bot = new Telegraf<ContextFix>(process.env.TOKEN as string);
-commands(bot)
+
+export default bot;
+commands(bot);
 
 mongoose.connect(url).then(()=>{
   console.log('mongo connected');
   bot.launch()
-  .then(() => console.log('Bot is live'))
+  .then(() => console.log('Bot is live ' + Date.now() ))
   .catch((err) => {
     console.log('error')
     console.log(err)

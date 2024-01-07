@@ -5,7 +5,7 @@ export interface IUsers {
     id: number;
     userName: string;
     name: string;
-    createdAt: Date;
+    createdAt?: Date;
     idGroup: number;
 }
 const usersSchema = new Schema<IUsers>({
@@ -18,4 +18,4 @@ const usersSchema = new Schema<IUsers>({
 
 const Users = mongoose.model('Users', usersSchema);
 
-module.exports = Users;
+export default Users

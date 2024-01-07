@@ -19,4 +19,4 @@ const GroupSchema = new Schema<IGroups>({
 
 const Group = mongoose.model('Groups', GroupSchema);
 
-module.exports = Group;
+export default Group;
