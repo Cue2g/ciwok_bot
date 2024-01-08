@@ -2,10 +2,6 @@
 
 **Version**: 1.0.1
 
-## Description
-
-ciwokBot is a bot designed to efficiently log and manage activities for different clients. This tool streamlines the organization and tracking of interactions with each client, enabling effective documentation of performed activities. Enhance communication and task monitoring through a comprehensive solution for client management on the Telegram platform.
-
 ## Installation
 
 ```bash
