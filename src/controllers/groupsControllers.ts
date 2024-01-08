@@ -8,6 +8,7 @@ async function check(id:number):Promise<boolean>{
 
 async function create(body:IGroups):Promise<void> {
     await Group.create(body);
+    console.log(`Group ${body.title} - ID: ${body.id} - value: ${body.value} has been created.`)
 }
 
 async function getValor(id:number){

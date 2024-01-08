@@ -185,9 +185,12 @@ async function saveTask(responseText: string, data: IActiveUsers, ctx: ContextFi
         bot.telegram.sendMessage(data.idGroup, `@${user?.userName} creo una tarea de:
 ${data.optionName}
 Fue asignada a @${TaskToUser}
-cantidad:${body.cantidad} `)
+cantidad:${body.cantidad} `);
 
-        ctx.reply(`Registro Guardado con Exito!`)
+
+        ctx.reply(`Registro Guardado con Exito!`);
+        console.log(`@${user?.userName} created a task: ${data.optionName} Assigned to: @${TaskToUser} Quantity: ${body.cantidad}`);
+
 
         return true
     } catch (error) {

@@ -71,7 +71,6 @@ async function find(idUser:number):Promise<IActiveUsers| null>{
 
 
 async function endStatus(idUser:number){
-    console.log('closing session',idUser)
     await ActiveUsers.updateOne({idUser:idUser}, { $set: { optionName: null, optionValue:null, activeUser:false} })
 }
 

@@ -3,7 +3,7 @@ import { IUsers} from "../models/Users"
 
 async function create(body:IUsers){
     await Users.create(body);
-    console.log('user created:' + body)
+    console.log(`User ${body.userName} - ID: ${body.id} - from group: ${body.idGroup} has been created.`)
 }
 
 async function check(id:number){
