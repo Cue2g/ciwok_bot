@@ -16,6 +16,8 @@
   },
   "scripts": {
     "buildWatch": "tsc --watch",
-    "dev": "node dir/app.js --watch"
+    "dev": "node dir/app.js --watch",
+    "start": "node dir/app.js",
+    "build": "tsc"
   }
 }

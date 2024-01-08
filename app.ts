@@ -20,14 +20,17 @@ export default bot;
 commands(bot);
 
 mongoose.connect(url).then(()=>{
-  console.log('mongo connected');
+  console.log(`mongo connected ${namedb}`);
   bot.launch()
-  .then(() => console.log('Bot is live ' + Date.now() ))
+  .then(() => console.log(`Bot ${process.env.BOTNAME}`))
   .catch((err) => {
-    console.log('error')
     console.log(err)
   })
-}).catch(() => {
-  console.log('error connecting to mongo')
+}).catch((err) => {
+  console.log(err)
+  console.log(`error connecting to mongo`)
 })
+
+process.once('SIGINT', () => bot.stop())
+process.once('SIGTERM', () => bot.stop())
 

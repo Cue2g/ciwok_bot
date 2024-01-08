@@ -84,7 +84,16 @@ const listServices = [
     {
         "name": "Sesion de Fotos",
         "valor": 10
-    }
+    },
+    {
+        "name": "Vídeo tipo A",
+        "valor": 2.5
+    },
+    {
+        "name": "Vídeo tipo B",
+        "valor": 3.5
+    },
+
 ]
 
 
@@ -167,15 +176,12 @@ async function saveTask(responseText: string, data: IActiveUsers, ctx: ContextFi
             tipo_de_pago: "tarea"
         }
 
-
-        console.log('here datasend')
         const response = await dataSend(body)
 
         if (!response) {
             ctx.reply('Erro al enviar la data')
             return false
         }
-        console.log('here3123123')
         bot.telegram.sendMessage(data.idGroup, `@${user?.userName} creo una tarea de:
 ${data.optionName}
 Fue asignada a @${TaskToUser}
@@ -185,7 +191,6 @@ cantidad:${body.cantidad} `)
 
         return true
     } catch (error) {
-        console.log(error)
         return false
     }
 }
@@ -199,9 +204,6 @@ function splitFunc(ctxText: string) {
 
 async function dataSend(body: any) {
     try {
-
-        console.log(body)
-        console.log(process.env.CLIENT_TOKEN)
         const response = await fetch('https://scc.ciwok.com/wp-json/jet-cct/comisiones_dec', {
             method: 'post',
             body: JSON.stringify(body),
@@ -209,16 +211,12 @@ async function dataSend(body: any) {
         })
 
         if (response.status != 200) {
-            console.log(response.json)
             const dataResponse = await response.json();
-            console.log(dataResponse)
             throw new Error('error al enviar la data')
         }
         const dataResponse = await response.json();
-
         return dataResponse
     } catch (error) {
-        console.log(error)
         return null
     }
 
