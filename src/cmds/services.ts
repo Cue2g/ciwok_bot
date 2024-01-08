@@ -7,22 +7,22 @@ import bot from "../../app";
 
 let conditionToStopEaringMessages = true
 
-export async function services(ctx: ContextFix){
+export default async function services(ctx: ContextFix){
     try {
         await ctx.deleteMessage()
     } catch (error) {
-        return ctx.reply('Por favor asegurese de seleccionar solo una opcion')
+        return ctx.reply('Por favor, asegúrese de seleccionar solo una opción');
     }
 
     const callbackQuery = ctx.update.callback_query
 
-    if(!callbackQuery) return ctx.reply('Error obtener el query');
+    if(!callbackQuery) return ctx.reply('Error al obtener el query');
     const option = callbackQuery.data,
     cQFrom = callbackQuery.from,
     optionValue = botController.listServices.find(service => option === service.name);
 
     if (!optionValue) {
-        return ctx.reply('Error al obtener el valor de la opcion, intentelo de nuevo')
+        return ctx.reply('Error al obtener el valor de la opción, inténtelo de nuevo');
     }
     activeUserController.updateStatus(Number(cQFrom.id),optionValue.name, optionValue.valor);
     conditionToStopEaringMessages = false;
@@ -36,14 +36,13 @@ Ingrese la persona y la cantidad
 
                 if (!conditionToStopEaringMessages) {
                 
-                    if(!ctx.message) throw new Error('ctx error');
-                    if(!ctx.update.message) throw new Error('ctx update')
+                    if (!ctx.message || !ctx.update.message) throw new Error('Error en el contexto');
     
                     const messageFrom = ctx.message.from,
                         messageChat = ctx.update.message.chat,
                         messageText = ctx.update.message.text
     
-                    if(!messageFrom) throw new Error('ctx message')
+                    if(!messageFrom) throw new Error('Error en el mensaje');
     
                     if (messageChat.id != messageFrom.id) {
                         return
@@ -61,12 +60,12 @@ Ingrese la persona y la cantidad
                     
                     const dataActiveUser = await activeUserController.find(messageFrom.id);
 
-                    console.log(dataActiveUser)
+
                     if (!dataActiveUser) {
                         return
                     }
     
-                    if(!messageText) throw new Error('test')
+                    if(!messageText) throw new Error('Error en el mensaje de texto');
 
     
                     if (conditionToStopEaringMessages === false && checkActive === true) {
@@ -84,7 +83,8 @@ Ingrese la persona y la cantidad
                     }
                 }
             } catch (error) {
-                console.log(error)
+                console.log(error);
+                return ctx.reply('Hubo un error al realizar la operacion')
             }
 
             

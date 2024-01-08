@@ -6,7 +6,7 @@ import botController from "../controllers/botController";
 
 import bot from "../../app";
 
-export async function start(ctx: ContextFix) {
+export default async function start(ctx: ContextFix) {
     
     const messageChat = ctx.update.message?.chat;
     const startPayload = ctx.startPayload;
@@ -16,17 +16,17 @@ export async function start(ctx: ContextFix) {
 
 
     if (chat && chat.type != 'private') {
-        if (!messageChat) return ctx.reply('No se pudo obtener el id del grupo');
+        if (!messageChat) return ctx.reply('No se pudo obtener el ID del grupo');
         const checkGroup = await groupController.check(messageChat.id);
 
         if (!checkGroup) {
-            return ctx.reply('El grupo no esta registrado. Para agregarlo envie el comando /agregarGrupo seguido del valor de la unidad');
+            return ctx.reply('El grupo no está registrado. Para agregarlo, envíe el comando /agregarGrupo seguido del valor de la unidad');
         }
     }
 
     if (!startPayload) {
         if (chat && chat.type === 'private') return ctx.reply('Este mensaje funciona solo desde un grupo');
-        if (!chat) return ctx.reply('No se pudo obtener el id del grupo')
+        if (!chat) return ctx.reply('No se pudo obtener el ID del grupo');
         return bot.telegram.sendMessage(chat.id, 'Registrar Tarea', {
             reply_markup: {
                 inline_keyboard: [
@@ -43,26 +43,26 @@ export async function start(ctx: ContextFix) {
 
 
     const payloadNumber = Number(startPayload)
-    if (!messageChat) return ctx.reply('No se pudo obtener el id del grupo');
+    if (!messageChat) return ctx.reply('No se pudo obtener el ID del grupo');
 
     const checkGroup = await groupController.check(payloadNumber);
 
     if (!checkGroup) {
-        return ctx.reply('El grupo no esta registrado. Para agregarlo envie el comando /agregarGrupo seguido del valor de la unidad');
+        return ctx.reply('El grupo no está registrado. Para agregarlo, envíe el comando /agregarGrupo seguido del valor de la unidad');
     }
 
-    if(!messageFrom) return ctx.reply('Error al obtener el id');
+    if(!messageFrom) return ctx.reply('Error al obtener el ID');
     const checkUserActive = await activeUserController.check(messageFrom.id);
 
     if(!checkUserActive) {
         const registerActiveUser = await activeUserController.create({idUser: messageFrom.id, idGroup: payloadNumber});
         if(!registerActiveUser){
-            return ctx.reply('1 Error al momento de registrar el chat, intentelo de nuevo');
+            return ctx.reply('Error al momento de registrar el chat, inténtelo de nuevo');
         }
     }else{
         const updateUserActive = await activeUserController.update(messageFrom.id, Number(startPayload))
         if(!updateUserActive){
-            return ctx.reply('2 Error al momento de registrar el chat, intentelo de nuevo');
+            return ctx.reply('Error al momento de registrar el chat, inténtelo de nuevo');
         }
     }
 

@@ -3,7 +3,6 @@ import { IGroups } from "../models/Groups";
 
 async function check(id:number):Promise<boolean>{
     const result = await Group.find({id:id});
-    console.log(result)
     return result.length !== 0;
 }
 

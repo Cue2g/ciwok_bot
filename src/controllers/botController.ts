@@ -14,7 +14,7 @@ interface ResponseItem {
     callback_data: string;
 }
 
-interface bodyTarea {
+export interface BodyTarea {
 	usuario: string;
 	tarea: String;
 	grupo: String;
@@ -211,18 +211,18 @@ async function dataSend(body: any) {
         })
 
         if (response.status != 200) {
-            const dataResponse = await response.json();
             throw new Error('error al enviar la data')
         }
         const dataResponse = await response.json();
         return dataResponse
     } catch (error) {
+        console.log(error)
         return null
     }
 
 }
 
-async function save(body: bodyTarea) {
+async function save(body: BodyTarea) {
     return dataSend(body)
 }
 
