@@ -1,4 +1,4 @@
-version: '3.9'
+
 services:
   ciwork_bot:
     image: cue2g/ciwok_bot:latest

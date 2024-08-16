@@ -82,8 +82,8 @@ const listServices = [
         "valor": 1.5
     },
     {
-        "name": "Sesion de Fotos",
-        "valor": 10
+        "name": "Sesión de Fotos",
+        "valor": 8
     },
     {
         "name": "Vídeo tipo A",
