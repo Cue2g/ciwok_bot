@@ -57,7 +57,6 @@ export default async function tarea(ctx: ContextFix) {
         cct_status: "publish"
     }
 
-
     const response = await botController.save(body);
     if(!response) return ctx.reply('Error al intentar guardar el grupo');
 

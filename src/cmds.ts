@@ -1,7 +1,6 @@
 import { ContextFix } from "../app";
 import Telegraf from "telegraf";
 import botController from "./controllers/botController";
-
 ///cmds
 import start from "./cmds/start";
 import addGroup from "./cmds/addGroup";
@@ -16,4 +15,7 @@ export function commands(bot: Telegraf<ContextFix>): void {
     bot.command('/agregarGrupo', addGroup);
     bot.action(listOfActions, services);
     bot.command('/tarea', tarea);
+    bot.command('/version' ,(ctx) => {
+        ctx.reply('1.0.4 - 20-ago-2024    @.@')
+    })
 }

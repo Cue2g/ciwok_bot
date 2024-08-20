@@ -46,26 +46,6 @@ const listServices = [
         "valor": 1
     },
     {
-        "name": "Video edición simple",
-        "valor": 2.5
-    },
-    {
-        "name": "Video animado",
-        "valor": 3
-    },
-    {
-        "name": "Video animado Ilustrado",
-        "valor": 5
-    },
-    {
-        "name": "Reel edición simple",
-        "valor": 1
-    },
-    {
-        "name": "Reel edición compleja",
-        "valor": 2
-    },
-    {
         "name": "Carrusel diseño (por pieza)",
         "valor": 0.5
     },
@@ -155,11 +135,12 @@ async function saveTask(responseText: string, data: IActiveUsers, ctx: ContextFi
         }
 
         let valorTotal: number = 0;
-
-        if (data.optionName === 'Sesion de Fotos') {
-            valorTotal = 10 * amountInput
+        if(!data.optionValue) throw new Error('Option Value null')
+        if (data.optionName === 'Sesión de Fotos') {
+          
+            valorTotal = data.optionValue * amountInput
         } else {
-            if(!data.optionValue) throw new Error('Option Value null')
+          
             const result = amountInput * data.optionValue;
             valorTotal = groupValue.value * result
         }
