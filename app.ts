@@ -18,7 +18,7 @@ const bot = new Telegraf<ContextFix>(process.env.TOKEN as string);
 
 export default bot;
 commands(bot);
-
+console.log("UPDATED")
 mongoose.connect(url).then(()=>{
   console.log(`mongo connected ${namedb}`);
   bot.launch()
