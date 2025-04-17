@@ -73,6 +73,10 @@ const listServices = [
         "name": "Vídeo tipo B",
         "valor": 3.5
     },
+    {
+      "name": "Subtitulos",
+      "valor": 2
+    }
 
 ]
 
